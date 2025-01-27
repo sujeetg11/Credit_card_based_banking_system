@@ -1,0 +1,12 @@
+<h1> Branch List </h1>
+
+<ul>
+    <% @branches.each do |b| %>
+        <li>
+            <%= link_to b.branch_name, b %>
+        </li>
+    <% end %>
+
+</ul>
+
+<%= link_to "Create new", new_branch_path %>

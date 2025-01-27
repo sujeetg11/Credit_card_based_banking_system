@@ -1,0 +1,12 @@
+<h1> <%= @branch.branch_name %> <h1>
+<h2> <%= @branch.branch_address %> <h2>
+<h2> <%= @branch.branch_manager %> <h2>
+<h2> <%= @branch.branch_phone %> <h2>
+<h2> <%= @branch.branch_email %> <h2>
+
+<%= link_to "Back", branches_path %>
+<%= link_to "Edit", edit_branch_path(@branch) %>
+<%= link_to "Destroy", branch_path(@branch), data:{
+    turbo_method: :delete,
+    turbo_confirm: "Are you Sure?"
+} %>
