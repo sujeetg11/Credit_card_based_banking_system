@@ -1,12 +1,14 @@
 class BranchesController < ApplicationController
-    before_action :set_branch, only: %i[show update destroy]
+    before_action :set_branch, only: %i[show update destroy restore]
+
 
     def index
-        @branches = Branch.all
+        # @branches = Branch.all
+        @branches = Branch.kept
     end
 
     def show
-        @branch = Branch.find(params[:id])
+        @branch = Branch.with_discarded.find(params[:id])
     end
 
     def new
@@ -36,13 +38,25 @@ class BranchesController < ApplicationController
     end
 
     def destroy
-        @branch.destroy
-        redirect_to branches_path, status: :see_other
-    end
+        @branch.discard
+        respond_to do |format|
+          format.html { redirect_to branches_path, notice: "Branch was successfully discarded." }
+          format.json { head :no_content }
+        end
+      end
     
+    def restore
+        @branch.undiscard
+        respond_to do |format|
+          format.html { redirect_to branch_path(@branch), notice: "Branch restored successfully." }
+          format.json { head :no_content }
+        end
+    end
+
+
     private
     def set_branch
-        @branch = Branch.find(params[:id])
+        @branch = Branch.with_discarded.find(params[:id])
     rescue ActiveRecord::RecordNotFound
         flash[:alert] = "Branch not found."
         redirect_to branches_path and return

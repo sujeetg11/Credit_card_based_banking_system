@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   # root "products#index"
 
   resources :branches
+
+  resources :branches do
+    member do
+      patch :restore
+    end
+  end
 end

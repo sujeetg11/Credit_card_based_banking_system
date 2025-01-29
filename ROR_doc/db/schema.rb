@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_25_110622) do
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.2].define(version: 2025_01_29_051513) do
   create_table "account_transactions", primary_key: "transaction_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "user_card_id", limit: 20
     t.datetime "transaction_date", null: false
@@ -37,8 +30,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_25_110622) do
     t.string "branch_email", limit: 100, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
     t.index ["branch_email"], name: "index_branches_on_branch_email", unique: true
     t.index ["branch_phone"], name: "index_branches_on_branch_phone", unique: true
+    t.index ["discarded_at"], name: "index_branches_on_discarded_at"
   end
 
   create_table "credit_cards", primary_key: "credit_card_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
@@ -63,6 +58,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_25_110622) do
     t.index ["phone_number"], name: "index_customers_on_phone_number", unique: true
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rewards", primary_key: "reward_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "transaction_id", limit: 20, null: false
     t.string "user_card_id", limit: 20, null: false
@@ -71,8 +73,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_25_110622) do
     t.datetime "last_updated", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end  
-  
+  end
+
   create_table "user_cards", primary_key: "user_card_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "credit_card_id", limit: 20, null: false
     t.string "customer_id", limit: 20, null: false
@@ -92,6 +94,4 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_25_110622) do
   add_foreign_key "rewards", "user_cards", primary_key: "user_card_id"
   add_foreign_key "user_cards", "credit_cards", primary_key: "credit_card_id"
   add_foreign_key "user_cards", "customers", primary_key: "customer_id"
-
-
 end

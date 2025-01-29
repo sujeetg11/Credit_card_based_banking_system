@@ -1,6 +1,6 @@
 <div class="container mt-5 d-flex justify-content-center">
 <div class="card" style="width: 23rem;">
-  <img src="https://images.unsplash.com/photo-1735945205189-ead34d91cf69?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Branch Image">
+  <img src="https://img.freepik.com/premium-photo/ai-generated-illustration-modern-bank-building-financial-branch-city-street_812649-1724.jpg" class="card-img-top" alt="Branch Image">
   <div class="card-body">
     <h5 class="card-title"><strong>Branch:</strong><%= @branch.branch_name %></h5>
     <p class="card-text"><strong>Branch Address:</strong><%= @branch.branch_address %></p>
@@ -13,11 +13,16 @@
   <div class="card-body">
     <%= link_to "Back", branches_path, class: "btn btn-outline-primary btn-sm" %>
     
+
+    <% if @branch.discarded? %>
+    <%= button_to "Restore", restore_branch_path(@branch), method: :patch, class: "btn btn-success btn-sm" %>
+    <% else %>
+
     <%= link_to "Delete", branch_path(@branch), data: { 
     turbo_method: :delete, 
     turbo_confirm: "Are you sure?" 
-}, class: "btn btn-outline-danger btn-sm" %>
-
+    }, class: "btn btn-outline-danger btn-sm" %>
+    <% end %>
   </div>
 </div>
 </div>

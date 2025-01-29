@@ -1,6 +1,8 @@
 class Branch < ApplicationRecord
+    include Discard::Model
     self.primary_key = "branch_id"
-  
+
+    default_scope -> { kept }
     before_create :generate_branch_id
   
     # Presence and length validations

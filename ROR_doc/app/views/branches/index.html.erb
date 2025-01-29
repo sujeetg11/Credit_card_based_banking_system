@@ -49,9 +49,10 @@
 
                 <!-- Action Buttons -->
                 <div class="d-flex justify-content-between">
-                  <%= link_to "View", branch_path(branch), class: "btn btn-outline-primary btn-sm" %>
-                  <%= link_to "Update", edit_branch_path(branch), class: "btn btn-outline-warning btn-sm" %>
-                  <%= link_to "Delete", branch_path(branch), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
+                  <%= link_to "View", branch_path(branch), class: "btn btn-outline-primary em-2" %>
+                  <%= link_to "Update", edit_branch_path(branch), class: "btn btn-outline-warning em-2" %>
+                  
+                  <%= link_to 'Delete Branch', branch_path(branch), method: :delete, data: { confirm: 'Are you sure you want to discard this branch?' }, class: 'btn btn-outline-danger me-2', title: 'Delete Branch' %>
                 </div>
               </div>
             </div>
