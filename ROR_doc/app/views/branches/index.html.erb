@@ -12,10 +12,14 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Show</a>
         </li>
+
       </ul>
     </div>
+    <%= button_to "logout"  , destroy_user_session_path , method: :delete %>
   </div>
 </nav>
+
+
 
 <h1 class="text-center mt-3"> Branches List </h1>
 
