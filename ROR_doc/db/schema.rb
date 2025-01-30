@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_29_051513) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_30_191832) do
   create_table "account_transactions", primary_key: "transaction_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "user_card_id", limit: 20
     t.datetime "transaction_date", null: false
