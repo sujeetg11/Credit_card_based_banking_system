@@ -1,5 +1,6 @@
 class BranchesController < ApplicationController
     before_action :set_branch, only: %i[show update destroy restore]
+    before_action :authenticate_user!
 
 
     def index
