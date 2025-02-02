@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < BaseController
 
     # skip_before_action :authenticate_request, only: [:create]
     before_action :set_user, only: [:show, :destroy]
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by(params[:id])
+        # @user = User.find_by(params[:id])
         render json: @user, status: :ok 
     end
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     end
 
     def update
-        unless @user.upadte(user_params)
+        unless @user.update(user_params)
             render json: {errors: @user.errors.full_messages},
                 status: :unprocessable_entity
         end
@@ -44,6 +44,5 @@ class UsersController < ApplicationController
 
         def set_user
             @user = User.find(params[:id])
-        end
-            
+        end     
 end
