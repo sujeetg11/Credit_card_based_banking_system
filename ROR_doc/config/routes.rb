@@ -25,4 +25,27 @@ Rails.application.routes.draw do
       patch :restore
     end
   end
+  
+  Rails.application.routes.draw do
+    namespace :api do
+      namespace :v1 do
+        resources :credit_cards do
+         member do
+          patch :restore
+          patch :discard
+         end
+        end
+      end 
+    end
+  end
+
+  Rails.application.routes.draw do
+    namespace :api do
+      namespace :v1 do
+        resources :customers, params: :customer_id
+        resources :credit_cards, params: :credit_card_id
+      end
+    end
+  end
+
 end

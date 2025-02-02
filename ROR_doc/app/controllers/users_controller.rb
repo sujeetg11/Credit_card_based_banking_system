@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    skip_before_action :authenticate_request, only: [:create]
+    # skip_before_action :authenticate_request, only: [:create]
     before_action :set_user, only: [:show, :destroy]
     skip_before_action :verify_authenticity_token
 
@@ -10,7 +10,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: @users, status: :ok 
+        @user = User.find_by(params[:id])
+        render json: @user, status: :ok 
     end
 
     def create
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
 
     private
         def user_params
-            params.permit(:username, :email, :password)
+            params.permit(:username, :email, :password, :name)
         end
 
         def set_user

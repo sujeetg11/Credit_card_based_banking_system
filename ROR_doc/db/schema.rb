@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_31_065304) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_02_104918) do
   create_table "account_transactions", primary_key: "transaction_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
     t.string "user_card_id", limit: 20
     t.datetime "transaction_date", null: false
@@ -41,6 +41,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_065304) do
     t.decimal "credit_limit", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
   end
 
   create_table "customers", primary_key: "customer_id", id: { type: :string, limit: 20 }, force: :cascade do |t|
