@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       namespace :v1 do
         resources :customers, params: :customer_id
         resources :credit_cards, params: :credit_card_id
+        resources :account_transactions, params: :transaction_id
+        resources :branches, params: :branch_id
+        resources :rewards, params: :reward_id
+        resources :user_cards, params: :user_card_id
       end
     end
   end
